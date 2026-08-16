@@ -16,7 +16,7 @@ Each run (encryption) creates: `data/<UTC_yyyyMMdd_HHmmssfff>/secret.bin` and `p
 
 ---
 ## Build & Run
-Requires .NET 9 SDK.
+Requires .NET 10 SDK.
 ```powershell
 # Build
 dotnet build

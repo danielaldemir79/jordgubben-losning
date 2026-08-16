@@ -65,8 +65,7 @@ public static class VaultApp
 		if (string.IsNullOrWhiteSpace(password)) { Console.WriteLine("Password empty."); return; }
 
 		byte[] salt = RandomNumberGenerator.GetBytes(saltSize);
-		using var kdf = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA512);
-		byte[] key = kdf.GetBytes(32);
+		byte[] key = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA512, 32);
 
 		byte[] nonce = RandomNumberGenerator.GetBytes(nonceSize);
 		int tagSize = 16;
@@ -151,8 +150,7 @@ public static class VaultApp
 		byte[] tag = new byte[tagLen]; fs.ReadExactly(tag);
 		byte[] ciphertext = new byte[fs.Length - fs.Position]; fs.ReadExactly(ciphertext);
 
-		using var kdf = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA512);
-		byte[] key = kdf.GetBytes(32);
+		byte[] key = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA512, 32);
 		using var aes = new AesGcm(key, tagLen);
 		byte[] plaintext = new byte[ciphertext.Length];
 		aes.Decrypt(nonce, ciphertext, tag, plaintext);
