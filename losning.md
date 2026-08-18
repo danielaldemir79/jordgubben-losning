@@ -40,8 +40,8 @@ Grattis, ni har lyckats dekryptera meddelandet! 🎉 Det här visar att ni kan a
 
 ## 4. Motivering
 
-Problemet är inte själva AES-GCM krypteringen utan hur lösenordet hanteras. Lösenordet ligger Base64-kodat i password.b64 bredvid den krypterade filen, så om någon får tag på båda filerna är det ganska enkelt att få fram lösenordet och dekryptera meddelandet.
+Problemet är inte själva AES-GCM krypteringen utan hur lösenordet hanteras. Lösenordet ligger Base64-kodat i password.b64 bredvid den krypterade filen, så om någon får tag på båda filerna är det ganska enkelt att få fram lösenordet och dekryptera meddelandet. Felet hör hemma i A04 Cryptographic Failures i OWASP Top 10:2025 eftersom algoritmen i sig är stark, men symmetrisk kryptering är bara så stark som nyckeln är hemlig, och här ligger nyckeln bredvid filen den ska skydda.
 
-Jag skulle därför inte spara lösenordet tillsammans med den krypterade filen. Programmet borde i stället fråga efter lösenordet när man vill dekryptera filen.
+Jag skulle därför inte spara lösenordet tillsammans med den krypterade filen. Det som hade stoppat mig är att ta bort rad 99 i Program.cs, alltså `File.WriteAllText(pwdPath, Convert.ToBase64String(...))`, och i stället låta DecryptFlow fråga efter lösenordet med samma ReadPassword som EncryptFlow redan använder på rad 64. Då finns lösenordet bara i minnet och sparas aldrig på disk.
 
 Den hemliga frasen bör inte heller ligga i appsettings.json om filen finns i Git. Hemligheter och nycklar bör sparas på ett säkrare ställe och inte direkt i projektets kod eller konfigurationsfiler.
