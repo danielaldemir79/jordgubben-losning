@@ -35,7 +35,7 @@ Jag lade sedan mappen från zip-filen i programmets datamapp, startade programme
 
 ## 3. Meddelandet
 
-Grattis, ni har lyckats dekryptera meddelandet! 🎉 Det här visar att ni kan analysera kod, hitta dolda funktioner och förstå hur kryptering fungerar i praktiken. 💻🔐 Kom ihåg: Riktig säkerhet bygger aldrig på att gömma koden – utan på stark kryptering, korrekt nyckelhantering och god design.
+Grattis, ni har lyckats dekryptera meddelandet! 🎉 Det här visar att ni kan analysera kod, hitta dolda funktioner och förstå hur kryptering fungerar i praktiken. 💻🔐 Kom ihåg: Riktig säkerhet bygger aldrig på att gömma koden utan på stark kryptering, korrekt nyckelhantering och god design.
 
 
 ## 4. Motivering
